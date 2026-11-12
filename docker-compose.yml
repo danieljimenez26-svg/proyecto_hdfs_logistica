@@ -1,0 +1,15 @@
+services:
+  hadoop:
+    image: apache/hadoop:3.4.0
+    container_name: hadoop-lab
+    hostname: hadoop-lab
+    ports:
+      - "9870:9870" # NameNode Web UI
+      - "8088:8088" # YARN Web UI
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+      - CORE-SITE.XML_fs.defaultFS=hdfs://localhost:9000
+    entrypoint: ["/bin/bash", "-c", "/opt/starter.sh standalone & tail -f /dev/null"]
+    volumes:
+      - ./datos:/workspace
